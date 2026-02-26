@@ -68,6 +68,7 @@ export default function Room() {
 
   useEffect(() => {
     if (!room) return
+    document.title = `${room.name} – Filmkveld`
     fetchSuggestions()
     fetchVotes()
     fetchPopcornVotes()
