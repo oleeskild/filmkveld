@@ -1,8 +1,7 @@
 import { POSTER_BASE } from '../tmdb'
 
-function letterboxdUrl(title, year) {
-  const query = year ? `${title} ${year}` : title
-  return `https://letterboxd.com/search/${encodeURIComponent(query)}/`
+function letterboxdUrl(title) {
+  return `https://letterboxd.com/search/${encodeURIComponent(title)}/`
 }
 
 const RANK_LABELS = {
@@ -52,7 +51,7 @@ export default function SuggestionCard({
                 {' · '}
                 <a
                   className="letterboxd-link"
-                  href={letterboxdUrl(suggestion.title, suggestion.release_year)}
+                  href={letterboxdUrl(suggestion.title)}
                   target="_blank"
                   rel="noopener noreferrer"
                   title="Se på Letterboxd"
