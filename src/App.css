@@ -553,6 +553,8 @@ body::before {
   border-radius: var(--radius);
   padding: 1.5rem;
   backdrop-filter: blur(8px);
+  min-width: 0;
+  overflow: hidden;
 }
 
 .category-header {
@@ -589,6 +591,7 @@ body::before {
 .picks-row {
   display: flex;
   gap: 0.5rem;
+  min-width: 0;
 }
 
 .pick-slot {
