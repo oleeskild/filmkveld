@@ -182,6 +182,54 @@ body::before {
   cursor: not-allowed;
 }
 
+.recent-rooms {
+  margin-top: 1.5rem;
+  text-align: left;
+}
+
+.recent-rooms h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.recent-rooms-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.recent-room-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0.9rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-xs);
+  text-decoration: none;
+  color: var(--text-light);
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.recent-room-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.recent-room-name {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.recent-room-code {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: monospace;
+}
+
 .home-footer {
   margin-top: 2rem;
 }

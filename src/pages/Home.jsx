@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 import { supabase } from '../supabaseClient'
 
 function generateCode() {
@@ -9,10 +9,36 @@ function generateCode() {
   return code
 }
 
+function getRecentCodes() {
+  const codes = []
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i)
+    if (key.startsWith('filmkveld-nick-')) {
+      codes.push(key.replace('filmkveld-nick-', ''))
+    }
+  }
+  return codes
+}
+
 export default function Home() {
   const [name, setName] = useState('')
   const [loading, setLoading] = useState(false)
+  const [recentRooms, setRecentRooms] = useState([])
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const codes = getRecentCodes()
+    if (codes.length === 0) return
+
+    supabase
+      .from('rooms')
+      .select('code, name, created_at')
+      .in('code', codes)
+      .order('created_at', { ascending: false })
+      .then(({ data }) => {
+        if (data) setRecentRooms(data)
+      })
+  }, [])
 
   async function handleCreate(e) {
     e.preventDefault()
@@ -58,6 +84,22 @@ export default function Home() {
             {loading ? 'Lager rom...' : '🎬 Start filmkveld!'}
           </button>
         </form>
+
+        {recentRooms.length > 0 && (
+          <div className="recent-rooms">
+            <h3>Nylige rom</h3>
+            <ul className="recent-rooms-list">
+              {recentRooms.map((room) => (
+                <li key={room.code}>
+                  <Link to={`/rom/${room.code}`} className="recent-room-link">
+                    <span className="recent-room-name">{room.name}</span>
+                    <span className="recent-room-code">{room.code}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         <div className="home-footer">
           <div className="film-strip">
