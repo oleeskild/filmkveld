@@ -1,7 +1,8 @@
 import { POSTER_BASE } from '../tmdb'
 
-function letterboxdUrl(title) {
-  const slug = title
+function letterboxdUrl(title, year) {
+  const base = year ? `${title} ${year}` : title
+  const slug = base
     .toLowerCase()
     .replace(/['']/g, '')
     .replace(/[^a-z0-9]+/g, '-')
@@ -56,7 +57,7 @@ export default function SuggestionCard({
                 {' · '}
                 <a
                   className="letterboxd-link"
-                  href={letterboxdUrl(suggestion.title)}
+                  href={letterboxdUrl(suggestion.title, suggestion.release_year)}
                   target="_blank"
                   rel="noopener noreferrer"
                   title="Se på Letterboxd"
