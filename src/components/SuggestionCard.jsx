@@ -1,13 +1,8 @@
 import { POSTER_BASE } from '../tmdb'
 
 function letterboxdUrl(title, year) {
-  const base = year ? `${title} ${year}` : title
-  const slug = base
-    .toLowerCase()
-    .replace(/['']/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '')
-  return `https://letterboxd.com/film/${slug}/`
+  const query = year ? `${title} ${year}` : title
+  return `https://letterboxd.com/search/${encodeURIComponent(query)}/`
 }
 
 const RANK_LABELS = {
